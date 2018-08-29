@@ -23,10 +23,10 @@ export default new Vuex.Store({
     actions: {
         getCards({ commit, dispatch }, payload) {
         
-            gameApi.get('/')
+            gameApi.get('')
                 .then(res => {
                     console.log(res)
-                    commit(setCards, payload)
+                    commit('setCards', payload)
                 })
 
         }
