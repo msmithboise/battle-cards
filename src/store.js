@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from './router';
 
 Vue.use(Vuex)
 
@@ -11,14 +12,27 @@ let gameApi = axios.create({
 
 })
 
+// start in store, handle your data.  figure out how you're gonna change the state, 
+// create where i put it in the state
+// create mutation
+// create an action that will call the mutation, this is where u make api calls
+// now there needs to be some method will call an action (dispatch) to start the process
+//
+
 export default new Vuex.Store({
     state: {
-        allGames: []
+        allGames: [],
+        newGame: {}
         // newGame object 
     },
     mutations: {
         setGames(state, games) {
-            state.allGames = games 
+            // this is where we looped over "game in games"
+            state.allGames = games
+        },
+        currentGame(state, game ){
+        state.newGame = game
+       
         }
         // create newGame mutation
     },
@@ -35,11 +49,18 @@ export default new Vuex.Store({
 
         },
         // here we are posting to the game server, then with our promise, we commit to call the mutation of the state of the game
-        createGame({ commit, dispatch }, payload) {
+        createGame({ commit, dispatch },gameConfig) {
 
-            gameApi.post('')
+            gameApi.post('',{
+                "gameConfig":{
+                    "playerName": "", 
+                    "opponents": 1, 
+                    "set": 2 }})
+
                 .then(res => {
-                    commit('')
+                    commit('currentGame', res.data)
+                    router.push({name: "Game", params: { id: res.data.id}})
+                    console.log(res.data)
                 })
 
 
