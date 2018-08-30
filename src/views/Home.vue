@@ -26,7 +26,7 @@
 
 <script>
 
-// import Game from '../components/Game.vue'
+
   
 export default {
   // by exporting this, other componenents have access to it's contents
