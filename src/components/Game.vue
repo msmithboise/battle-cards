@@ -2,29 +2,32 @@
     <div class="game container-fluid">
 
         <div class="row">
-            <div class="col-sm-2 card opponent" v-for="card in currentGame.players[0].hand" :key="card">
+            <div class="col-sm-2 card opponent" v-for="card in currentGame.players[1].hand" :key="card">
+                <div class="opponents-card" @click="selectCpuCard(currentGame.players[1].id, card.id)">
 
-                <h2>{{card.name}}</h2>
-                <p>Health: {{card.health}}</p>
-                <p>Attack: {{card.attack}}</p>
-                <p>Defense: {{card.defense}}</p>
-                <img :src="card.img" alt="">
+                    <h2>{{card.name}}</h2>
+                    <p>Health: {{card.health}}</p>
+                    <p>Attack: {{card.attack}}</p>
+                    <p>Defense: {{card.defense}}</p>
+                    <img :src="card.img" alt="">
+                </div>
             </div>
 
         </div>
 
         <div class="row fight"></div>
-        <button>Fight!</button>
+        <!-- <button>Fight!</button> -->
 
         <div class="row">
-            <div class="col-sm-2 card hero" v-for="card in currentGame.players[1].hand" :key="card">
-                <div class="selected-player" @click="selectPlayer">
-                <h2>{{card.name}}</h2>
-                <p>Health: {{card.health}}</p>
-                <p>Attack: {{card.attack}}</p>
-                <p>Defense: {{card.defense}}</p>
-                <img :src="card.img" alt="">
-            </div>
+            <div class="col-sm-2 card hero" v-for="card in currentGame.players[0].hand" :key="card">
+                <div class="hero-card" @click="selectPlayerCard(currentGame.players[0].id, card.id)">
+                    <h2>{{card.name}}</h2>
+
+                    <p>Health: {{card.health}}</p>
+                    <p>Attack: {{card.attack}}</p>
+                    <p>Defense: {{card.defense}}</p>
+                    <img :src="card.img" alt="">
+                </div>
             </div>
 
         </div>
@@ -40,7 +43,12 @@
         name: "Game",
         data() {
             return {
-
+                attack: {
+                    playerId: "",
+                    playerCardId: "",
+                    opponentId: "",
+                    opponentCardId: ""
+                }
 
             }
         },
@@ -51,15 +59,24 @@
             },
 
             setPlayer() {
-                return this.$store.state.player
+                return this.$store.state.activePlayer
             }
 
         },
         methods: {
-        selectPlayer(){
-            this.$store.dispatch("selectPlayer")
+            selectPlayer() {
+                this.$store.dispatch("selectPlayer", player)
+            },
+            selectPlayerCard(pId, pcId) {
+                this.attack.playerId = pId
+                this.attack.playerCardId = pcId
+            },
+            selectCpuCard(cId, ccId) {
+                this.attack.opponentId = cId
+                this.attack.opponentCardId = ccId
+            }
         }
-        }
+
 
     }
 </script>
@@ -86,10 +103,11 @@
         background-color: #3b3b3b;
     }
 
-    .card:hover{
+    .card:hover {
         border: 3px solid #f9f9f9;
         background-color: #f9f9f938;
     }
+
     .opponent {
         border: 5px solid crimson;
     }

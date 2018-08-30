@@ -23,7 +23,7 @@ export default new Vuex.Store({
     state: {
         allGames: [],
         newGame: {},
-        player: {}
+        activePlayer: {}
         // newGame object 
     },
     mutations: {
@@ -37,8 +37,8 @@ export default new Vuex.Store({
        
         },
 
-        setPlayer(state, player){
-            state.player = player
+        selectPlayer(state, activePlayer){
+            state.activePlayer = activePlayer
         }
         // create newGame mutation
     },
@@ -71,8 +71,9 @@ export default new Vuex.Store({
 
         },
 
-        setPlayer({commit,dispatch},player){
-            commit('setPlayer', player)
+        selectPlayer({commit,dispatch},player){
+
+            commit('selectPlayer', player)
 
 
         }
