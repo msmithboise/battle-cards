@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="home">
     <h1>hello</h1>
     <button @click="getGames()">get game</button>
     <button @click="createGame()">new game</button>
     <div>
-      <p>
+      <!-- <p>
         {{gameConfig}}
-      </p>
+      </p> -->
     </div>
     <!-- if there are "games" currently in the state []... -->
     <div v-if="games">
@@ -67,7 +67,7 @@ export default {
   },
   components:{
     // this gives access of other components to the current component i'm in.
-    // Game
+    
   }
    
   }

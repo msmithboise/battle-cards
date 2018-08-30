@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="game">
+        <div>
+
+        </div>
 game
 
 
@@ -17,6 +20,7 @@ export default {
     computed:{
         currentGame(){
       return this.$store.state.newGame
+      
     }
     }
     

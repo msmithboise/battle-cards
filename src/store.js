@@ -32,6 +32,7 @@ export default new Vuex.Store({
         },
         currentGame(state, game ){
         state.newGame = game
+        console.log(game)
        
         }
         // create newGame mutation
@@ -43,8 +44,7 @@ export default new Vuex.Store({
 // accessing the api to get data, then with data, calling the setGame mutation to change the state
             gameApi.get('')
                 .then(res => {
-                    console.log(res)
-                    commit('setGames', res.data)
+                commit('setGames', res.data)
                 })
 
         },
