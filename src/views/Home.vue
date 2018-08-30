@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1>hello</h1>
-    <button @click="getGames()">get game</button>
+    <h1>Battle Bots</h1>
+    <!-- <button @click="getGames()">get game</button> -->
     <button @click="createGame()">new game</button>
     <div>
       <!-- <p>
