@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Battle Bots</h1>
+    <h1>Battle Catz</h1>
     <!-- <button @click="getGames()">get game</button> -->
     <button @click="createGame()">new game</button>
     <div>

@@ -22,7 +22,8 @@ let gameApi = axios.create({
 export default new Vuex.Store({
     state: {
         allGames: [],
-        newGame: {}
+        newGame: {},
+        player: {}
         // newGame object 
     },
     mutations: {
@@ -34,6 +35,10 @@ export default new Vuex.Store({
         state.newGame = game
         console.log(game)
        
+        },
+
+        setPlayer(state, player){
+            state.player = player
         }
         // create newGame mutation
     },
@@ -55,13 +60,19 @@ export default new Vuex.Store({
                 "gameConfig":{
                     "playerName": "", 
                     "opponents": 1, 
-                    "set": 2 }})
+                    "set": 4 }})
 
                 .then(res => {
                     commit('currentGame', res.data)
                     router.push({name: "Game", params: { id: res.data.id}})
                     console.log(res.data)
                 })
+
+
+        },
+
+        setPlayer({commit,dispatch},player){
+            commit('setPlayer', player)
 
 
         }
