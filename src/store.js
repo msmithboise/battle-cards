@@ -6,7 +6,7 @@ import router from './router';
 Vue.use(Vuex)
 
 let gameApi = axios.create({
-    baseURL: 'https://inspire-server.herokuapp.com/cards',
+    baseURL: 'https://inspire-server.herokuapp.com/cards/',
     timeout: 3000,
 
 
@@ -53,6 +53,12 @@ export default new Vuex.Store({
                 })
 
         },
+        getGame({commit, dispatch}, id){
+            gameApi.get(id)
+                .then(res=>{
+                    commit('currentGame', res.data.data)
+                })
+        },
         // here we are posting to the game server, then with our promise, we commit to call the mutation of the state of the game
         createGame({ commit, dispatch },gameConfig) {
 
@@ -76,6 +82,13 @@ export default new Vuex.Store({
             commit('selectPlayer', player)
 
 
+        },
+
+        attack({commit,dispatch, state}, payload){
+            gameApi.put(state.newGame.id, payload)
+            .then(res => {
+                dispatch("getGame", state.newGame.id)
+            })
         }
     }
 })
