@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h1>Battle Catz</h1>
+    <h1>Battle Catz<img src="../assets/catlogo.jpg" alt=""></h1>
+    
+    
     <!-- <button @click="getGames()">get game</button> -->
     <button @click="createGame()">new game</button>
     <div>
@@ -78,3 +80,17 @@ export default {
 // now there needs to be some method will call an action (dispatch) to start the process
 //
 </script>
+
+
+<style>
+
+h1{
+  
+  font-family: 'Freckle Face', cursive;
+}
+
+button{
+  font-family: 'Freckle Face', cursive;
+}
+
+</style>

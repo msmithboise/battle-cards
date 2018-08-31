@@ -3,6 +3,8 @@
         <div v-if="currentGame.id">
             <div class="row">
                 <div class="col-sm-2 card opponent" v-for="card in currentGame.players[1].hand" :key="card.id">
+                   
+                   <div v-if="card.visible">
                     <div class="opponents-card" @click="selectCpuCard(currentGame.players[1].id, card.id)">
     
                         <h2>{{card.name}}</h2>
@@ -12,10 +14,19 @@
                         <img :src="card.img" alt="">
                     </div>
                 </div>
+                <div v-else>
+                        <img class="cardback" src="../assets/cardback.jpg" alt="">
+                </div>
+                
+                
+                
+                </div>
     
             </div>
     
-            <div class="row fight"></div>
+            <div class="row fight">
+                
+            </div>
             <button @click="fight">Fight!</button>
     
             <div class="row">
@@ -55,7 +66,10 @@
                     playerCardId: "",
                     opponentId: "",
                     opponentCardId: ""
-                }
+                },
+                isActive: ""
+
+                
 
             }
         },
@@ -77,6 +91,7 @@
             selectPlayerCard(pId, pcId) {
                 this.attack.playerId = pId
                 this.attack.playerCardId = pcId
+                this.isActive = true
             },
             selectCpuCard(cId, ccId) {
                 this.attack.opponentId = cId
@@ -84,7 +99,12 @@
             },
             fight(){
                 this.$store.dispatch("attack", this.attack)
+            },
+            revealCard(){
+
             }
+
+
 
         }
 
@@ -131,4 +151,21 @@
         border: 3px solid #f9f9f9;
         background-color: #f9f9f938;
     } */
+
+    p{
+        font-family: 'Freckle Face', cursive;
+    }
+
+    h2{
+        font-family: 'Freckle Face', cursive;
+    }
+
+     .isActive {
+        border: 5px solid blue;
+    }
+
+    .cardback{
+        width: 200px;
+        height: 300px;
+    }
 </style>
