@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Battle Catz<img src="../assets/catlogo.jpg" alt=""></h1>
+    <h1 class="title">Battle Catz<img src="../assets/catlogo.jpg" alt=""></h1>
     
     
     <!-- <button @click="getGames()">get game</button> -->
@@ -84,9 +84,10 @@ export default {
 
 <style>
 
-h1{
+.title{
   
   font-family: 'Freckle Face', cursive;
+  color: black;
 }
 
 button{

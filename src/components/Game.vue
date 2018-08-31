@@ -2,45 +2,45 @@
     <div class="game container-fluid">
         <div v-if="currentGame.id">
             <div class="row">
-                <div class="col-sm-2 card opponent" v-for="card in currentGame.players[1].hand" :key="card.id">
-                   
-                   <div v-if="card.visible">
-                    <div class="opponents-card" @click="selectCpuCard(currentGame.players[1].id, card.id)">
-    
-                        <h2>{{card.name}}</h2>
-                        <p>Health: {{card.health}}</p>
-                        <p>Attack: {{card.attack}}</p>
-                        <p>Defense: {{card.defense}}</p>
-                        <img :src="card.img" alt="">
-                    </div>
+                    <div class="col-sm-2 card opponent" v-for="card in currentGame.players[1].hand" :key="card.id">
+                        <div v-if="card.visible" @click="selectCpuCard(currentGame.players[1].id, card.id)">
+                                <h2>{{card.name}}</h2>
+                                <p>Health: {{card.health}}</p>
+                                <p>Attack: {{card.attack}}</p>
+                                <p>Defense: {{card.defense}}</p>
+                                <img :src="card.img" alt="">
+                            
+                        </div>
+                        <div v-else>
+                            <img class="cardback" src="../assets/cardback.jpg" @click="selectCpuCard(currentGame.players[1].id, card.id)" alt="">
+                        </div>
+
+
+
+
                 </div>
-                <div v-else>
-                        <img class="cardback" src="../assets/cardback.jpg" alt="">
-                </div>
-                
-                
-                
-                </div>
-    
+
             </div>
-    
+
             <div class="row fight">
-                
+                <div class="col">
+
+                    <button @click="fight">Fight!</button>
+                </div>
             </div>
-            <button @click="fight">Fight!</button>
-    
+
             <div class="row">
                 <div class="col-sm-2 card hero" v-for="card in currentGame.players[0].hand" :key="card.id">
                     <div class="hero-card" @click="selectPlayerCard(currentGame.players[0].id, card.id)">
                         <h2>{{card.name}}</h2>
-    
+
                         <p>Health: {{card.health}}</p>
                         <p>Attack: {{card.attack}}</p>
                         <p>Defense: {{card.defense}}</p>
                         <img :src="card.img" alt="">
                     </div>
                 </div>
-    
+
             </div>
         </div>
 
@@ -54,10 +54,10 @@
     export default {
         name: "Game",
         props: ['id'],
-        mounted(){
-          if(!this.$store.state.newGame.id){
-              this.$store.dispatch('getGame', this.id)
-          }  
+        mounted() {
+            if (!this.$store.state.newGame.id) {
+                this.$store.dispatch('getGame', this.id)
+            }
         },
         data() {
             return {
@@ -69,7 +69,7 @@
                 },
                 isActive: ""
 
-                
+
 
             }
         },
@@ -91,16 +91,17 @@
             selectPlayerCard(pId, pcId) {
                 this.attack.playerId = pId
                 this.attack.playerCardId = pcId
-                this.isActive = true
+
             },
             selectCpuCard(cId, ccId) {
                 this.attack.opponentId = cId
                 this.attack.opponentCardId = ccId
+                // this.visible = true
             },
-            fight(){
+            fight() {
                 this.$store.dispatch("attack", this.attack)
             },
-            revealCard(){
+            revealCard() {
 
             }
 
@@ -152,19 +153,19 @@
         background-color: #f9f9f938;
     } */
 
-    p{
+    p {
         font-family: 'Freckle Face', cursive;
     }
 
-    h2{
+    h2 {
         font-family: 'Freckle Face', cursive;
     }
 
-     .isActive {
+    .isActive {
         border: 5px solid blue;
     }
 
-    .cardback{
+    .cardback {
         width: 200px;
         height: 300px;
     }
