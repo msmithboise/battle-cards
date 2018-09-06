@@ -1,5 +1,9 @@
 <template>
     <div class="game container-fluid">
+        <div class="text-white" v-if="currentGame.winner">
+            <h1 v-if="currentGame.winner.name == setPlayer.name">Winner!</h1>
+            <h1 v-else>Loser!</h1>
+        </div>
         <div v-if="currentGame.id">
             <div class="row">
                     <div class="col-sm-2 card opponent" v-for="card in currentGame.players[1].hand" :key="card.id">

@@ -13,6 +13,7 @@
     <!-- if there are "games" currently in the state []... -->
     <div v-if="games">
 <!-- loop through all games located in the state [] and return all game id's -->
+    
       <p v-for="game in games">
         <!-- "game is our new variable we made up after loop" -->
         {{game._id}}
