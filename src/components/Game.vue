@@ -3,6 +3,7 @@
         <div class="text-white" v-if="currentGame.winner">
             <h1 v-if="currentGame.winner.name == setPlayer.name">Winner!</h1>
             <h1 v-else>Loser!</h1>
+            <button @click="reset">Play Again?</button>
         </div>
         <div v-if="currentGame.id">
             <div class="row">
@@ -105,8 +106,8 @@
             fight() {
                 this.$store.dispatch("attack", this.attack)
             },
-            revealCard() {
-
+            reset() {
+            this.$store.dispatch("createGame")
             }
 
 
