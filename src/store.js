@@ -10,7 +10,7 @@ var baseUrl = production ? 'battle-catz.herokuapp.com/' : '//inspire-server.hero
 
 
 let gameApi = axios.create({
-    baseURL: 'https://inspire-server.herokuapp.com/cards/',
+    baseURL: baseUrl + 'https://inspire-server.herokuapp.com/cards/',
     timeout: 3000,
 
 
