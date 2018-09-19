@@ -5,6 +5,10 @@ import router from './router';
 
 Vue.use(Vuex)
 
+var production = !window.location.host.includes('https://inspire-server.herokuapp.com');
+var baseUrl = production ? 'battle-catz.herokuapp.com/' : '//inspire-server.herokuapp.com';
+
+
 let gameApi = axios.create({
     baseURL: 'https://inspire-server.herokuapp.com/cards/',
     timeout: 3000,
