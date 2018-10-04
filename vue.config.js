@@ -1,4 +1,4 @@
 module.exports = {
-  baseUrl: 'battle-cards/docs',
+  baseUrl: '//msmithboise.github.io/battle-cards/docs',
   outputDir: 'docs'
 }
