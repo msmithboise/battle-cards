@@ -5,15 +5,11 @@ import router from './router';
 
 Vue.use(Vuex)
 
-var production = !window.location.host.includes('https://inspire-server.herokuapp.com');
-var baseUrl = production ? 'battle-catz.herokuapp.com/' : '//inspire-server.herokuapp.com';
 
 
 let gameApi = axios.create({
     baseURL: baseUrl + 'https://inspire-server.herokuapp.com/cards/',
-    timeout: 3000,
-
-
+    timeout: 3000
 })
 
 // start in store, handle your data.  figure out how you're gonna change the state, 
