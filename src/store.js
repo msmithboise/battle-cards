@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 
 let gameApi = axios.create({
-    baseURL: baseUrl + 'https://inspire-server.herokuapp.com/cards/',
+    baseURL: 'https://inspire-server.herokuapp.com/cards/',
     timeout: 3000
 })
 
@@ -31,13 +31,13 @@ export default new Vuex.Store({
             // this is where we looped over "game in games"
             state.allGames = games
         },
-        currentGame(state, game ){
-        state.newGame = game
-        console.log(game)
-       
+        currentGame(state, game) {
+            state.newGame = game
+            console.log(game)
+
         },
 
-        selectPlayer(state, activePlayer){
+        selectPlayer(state, activePlayer) {
             state.activePlayer = activePlayer
         }
         // create newGame mutation
@@ -46,49 +46,51 @@ export default new Vuex.Store({
     actions: {
         getGames({ commit, dispatch }) {
 
-// accessing the api to get data, then with data, calling the setGame mutation to change the state
+            // accessing the api to get data, then with data, calling the setGame mutation to change the state
             gameApi.get('')
                 .then(res => {
-                commit('setGames', res.data)
+                    commit('setGames', res.data)
                 })
 
         },
-        getGame({commit, dispatch}, id){
+        getGame({ commit, dispatch }, id) {
             gameApi.get(id)
-                .then(res=>{
+                .then(res => {
                     commit('currentGame', res.data.data)
                 })
         },
         // here we are posting to the game server, then with our promise, we commit to call the mutation of the state of the game
-        createGame({ commit, dispatch },gameConfig) {
+        createGame({ commit, dispatch }, gameConfig) {
 
-            gameApi.post('',{
-                "gameConfig":{
-                    "playerName": "", 
-                    "opponents": 1, 
-                    "set": 4 }})
+            gameApi.post('', {
+                "gameConfig": {
+                    "playerName": "",
+                    "opponents": 1,
+                    "set": 4
+                }
+            })
 
                 .then(res => {
                     commit('currentGame', res.data)
-                    router.push({name: "Game", params: { id: res.data.id}})
+                    router.push({ name: "Game", params: { id: res.data.id } })
                     console.log(res.data)
                 })
 
 
         },
 
-        selectPlayer({commit,dispatch},player){
+        selectPlayer({ commit, dispatch }, player) {
 
             commit('selectPlayer', player)
 
 
         },
 
-        attack({commit,dispatch, state}, payload){
+        attack({ commit, dispatch, state }, payload) {
             gameApi.put(state.newGame.id, payload)
-            .then(res => {
-                dispatch("getGame", state.newGame.id)
-            })
+                .then(res => {
+                    dispatch("getGame", state.newGame.id)
+                })
         }
     }
 })
